@@ -1,0 +1,23 @@
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 70%;
+  font-size: large;
+}
+
+th {
+  padding: 0.7rem 0.5rem;
+  background-color: var(--bs-dark);
+  color: var(--bs-white);
+}
+
+td {
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  table {
+    width: 100%;
+  }
+}
