@@ -4,43 +4,54 @@ import { useParams } from "react-router";
 import leads from "../lead.json";
 import { Link } from "react-router";
 import Aside from "../components/Aside";
+import useAxios from "../hooks/useAxios";
 const LeadManagement = () => {
-  const { lead_Name } = useParams();
-  const current_lead = leads.find((info) => info.leadName === lead_Name);
-  console.log(current_lead);
+  const { lead_id } = useParams();
+  const current_lead_data = useAxios(
+    `https://avanya-backend.vercel.app/getLeadData/${lead_id}`
+  );
+  const { data, loading, error } = current_lead_data;
+  const current_lead = data?.data;
   return (
     <div className="body">
-      <Header>{current_lead.leadName}</Header>
+      <Header>Lead Management</Header>
       <div className="page-content">
         <Aside />
         <div className="main-page">
-          <div className="lead-details">
-            <h2>Details of Lead</h2>
-            <ul class="list-group w-100">
-              <li class="list-group-item bg-secondary text-white">
-                Lead Name: {current_lead.leadName}
-              </li>
-              <li class="list-group-item">
-                Sales agent: {current_lead.assignedSalesAgent}
-              </li>
-              <li class="list-group-item">
-                Lead Source: {current_lead.leadSource}
-              </li>
-              <li class="list-group-item">
-                Lead Status: {current_lead.leadStatus}
-              </li>
-              <li class="list-group-item">Priority: {current_lead.priority}</li>
-              <li class="list-group-item">
-                Time to close: {current_lead.timeToClose}
-              </li>
-            </ul>
-            <button
-              className="btn btn-primary fs-5"
-              style={{ alignSelf: "flex-end" }}
-            >
-              Edit lead Details
-            </button>
-          </div>
+          {loading && <p>Lead Data is loading</p>}
+          {error && <p>Error while loading lead data</p>}
+          {current_lead && (
+            <div className="lead-details">
+              <h2>Details of Lead</h2>
+              <ul class="list-group w-100">
+                <li class="list-group-item bg-secondary text-white">
+                  Lead Name: {current_lead.name}
+                </li>
+                <li class="list-group-item">
+                  Sales agent: {current_lead.salesAgent?.name}
+                </li>
+                <li class="list-group-item">
+                  Lead Source: {current_lead.source}
+                </li>
+                <li class="list-group-item">
+                  Lead Status: {current_lead.status}
+                </li>
+                <li class="list-group-item">
+                  Priority: {current_lead.priority}
+                </li>
+                <li class="list-group-item">
+                  Time to close: {current_lead.timeToClose}
+                </li>
+              </ul>
+              <button
+                className="btn btn-primary fs-5"
+                style={{ alignSelf: "flex-end" }}
+              >
+                Edit lead Details
+              </button>
+            </div>
+          )}
+
           <div className="comment-section">
             <h2>Comments</h2>
             <div className="card p-1">

@@ -12,7 +12,7 @@ import SalesAgentsContextProvider from "./context/SalesAgentsContext.jsx";
 import LeadContextProvider from "./context/LeadContext.jsx";
 const route = createBrowserRouter([
   { path: "/", element: <App /> },
-  { path: "/leads/:lead_Name", element: <LeadManagement /> },
+  { path: "/leads/:lead_id", element: <LeadManagement /> },
   { path: "/leads", element: <Leadlist /> },
   { path: "/addLead", element: <AddLead /> },
   { path: "/salesAgents", element: <SalesAgents /> },

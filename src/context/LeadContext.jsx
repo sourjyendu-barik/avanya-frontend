@@ -12,7 +12,7 @@ const LeadContextProvider = ({ children }) => {
   // https://avanya-backend.vercel.app/addNewLead
   const [lead_List, setLead_List] = useState([]);
   useEffect(() => {
-    if (Array.isArray(data?.data) && data.data.length > 0) {
+    if (Array.isArray(data?.data) && data.data) {
       setLead_List(data.data);
     }
   }, [data]);

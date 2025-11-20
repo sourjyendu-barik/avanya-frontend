@@ -4,7 +4,17 @@ import Header from "./components/Header";
 import AppComponentCards from "./components/AppComponent/AppComponentCards";
 import NavAside from "./components/AppComponent/NavAside";
 import { Link } from "react-router";
+import { useLeadContext } from "./context/LeadContext";
 function App() {
+  const { lead_List, leadDataloading, leadLoadingError } = useLeadContext();
+
+  const new_lead = lead_List.filter((l) => l.status === "New").length;
+  const contacted_lead = lead_List.filter(
+    (l) => l.status === "Contacted"
+  ).length;
+  const qualified_lead = lead_List.filter(
+    (l) => l.status === "Qualified"
+  ).length;
   return (
     <div className="body">
       <Header> Anvaya CRM Dashboard </Header>
@@ -12,12 +22,35 @@ function App() {
         <NavAside />
         <main className="main-page">
           <AppComponentCards />
-          <div className="lead-status">
-            <h3>Staus:</h3>
+          <div className="lead-status mt-4">
+            <h3>Status:</h3>
             <ul>
-              <li>New : 5 leads</li>
-              <li>Contacted : 3 leads</li>
-              <li>Qualified : 2 leads</li>
+              <li>
+                New:
+                {leadDataloading ? (
+                  <span> loading...</span>
+                ) : (
+                  ` ${new_lead} leads`
+                )}
+              </li>
+
+              <li>
+                Contacted:
+                {leadDataloading ? (
+                  <span> loading...</span>
+                ) : (
+                  ` ${contacted_lead} leads`
+                )}
+              </li>
+
+              <li>
+                Qualified:
+                {leadDataloading ? (
+                  <span> loading...</span>
+                ) : (
+                  ` ${qualified_lead} leads`
+                )}
+              </li>
             </ul>
           </div>
           <div className="quick-filters">
