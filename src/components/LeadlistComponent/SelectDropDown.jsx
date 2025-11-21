@@ -1,6 +1,6 @@
 import React from "react";
 import Select from "react-select";
-const SelectDropDown = ({ label, options, value, onChange }) => {
+const SelectDropDown = ({ label, options, value, onChange, isMultiFlag }) => {
   return (
     <div className="mb-2 flex-fill">
       <label htmlFor={label} className="form-label fw-semibold">
@@ -9,10 +9,12 @@ const SelectDropDown = ({ label, options, value, onChange }) => {
       <Select
         inputId={label}
         options={options}
-        placeholder={`select a ${label}`}
+        placeholder={`${label}`}
         classNamePrefix="react-select"
         value={value}
         onChange={onChange}
+        menuPlacement="top"
+        isMulti={isMultiFlag}
       />
     </div>
   );

@@ -6,7 +6,7 @@ import Select from "react-select";
 import { useLeadContext } from "../../context/LeadContext";
 const LeadlistFilter = () => {
   const navigate = useNavigate();
-  const { filters, updateFilter } = useLeadContext();
+  const { filters, updateFilter, clearFilter } = useLeadContext();
   const {
     salesAgentDataLoading,
     salesAgentDataLoadingError,
@@ -58,16 +58,26 @@ const LeadlistFilter = () => {
           />
         </li>
         <li>
-          <SelectDropDown
-            label="Tags"
-            options={tag_list}
-            value={
-              tag_list.filter((o) => filters.tags?.includes(o.value)) || []
-            }
-            onChange={(selected) =>
-              updateFilter(selected ? selected.map((s) => s.value) : [])
-            }
-          />
+          <div className="mb-2 flex-fill">
+            <label htmlFor={"tag"} className="form-label fw-semibold">
+              Tags:
+            </label>
+            <Select
+              inputId={"tag"}
+              options={tag_list}
+              placeholder={`Add tags`}
+              classNamePrefix="react-select"
+              value={tag_list.filter((o) => filters.tags.includes(o.value))}
+              onChange={(selected) =>
+                updateFilter(
+                  "tags",
+                  selected?.map((opt) => opt.value)
+                )
+              }
+              menuPlacement="top"
+              isMulti
+            />
+          </div>
         </li>
         <li>
           <SelectDropDown
@@ -80,22 +90,14 @@ const LeadlistFilter = () => {
           />
         </li>
         <li>
-          <div className="mb-2 flex-fill">
-            <label htmlFor="sort" className="form-label fw-semibold">
-              Sort By
-            </label>
-            <Select
-              inputId="sort"
-              options={sortOptions}
-              classNamePrefix="react-select"
-              value={
-                sortOptions.find((o) => o.value === filters.sortByAsc) || null
-              }
-              onChange={(selected) =>
-                updateFilter("sortByAsc", selected?.value)
-              }
-            />
-          </div>
+          <SelectDropDown
+            label="Sort By"
+            options={sortOptions}
+            value={
+              sortOptions.find((o) => o.value === filters.sortByAsc) || null
+            }
+            onChange={(selected) => updateFilter("sortByAsc", selected?.value)}
+          />
         </li>
         <li>
           <button
@@ -104,6 +106,15 @@ const LeadlistFilter = () => {
             onClick={() => navigate("/addLead")}
           >
             Add New Lead
+          </button>
+        </li>
+        <li>
+          <button
+            className="btn btn-secondary"
+            style={{ position: "relative", top: "1.8rem" }}
+            onClick={() => clearFilter()}
+          >
+            Clear Filter
           </button>
         </li>
       </ul>

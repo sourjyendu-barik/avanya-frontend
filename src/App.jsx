@@ -8,7 +8,8 @@ import NavAside from "./components/AppComponent/NavAside";
 import { Link } from "react-router";
 import { useLeadContext } from "./context/LeadContext";
 function App() {
-  const { lead_List, leadDataloading, leadLoadingError } = useLeadContext();
+  const { lead_List, leadDataloading, updateFilter, clearFilter } =
+    useLeadContext();
 
   const new_lead = lead_List.filter((l) => l.status === "New").length;
   const contacted_lead = lead_List.filter(
@@ -58,16 +59,35 @@ function App() {
           <div className="quick-filters">
             <ul>
               <li>
-                <button className="btn btn-secondary flex-fill">New</button>
+                <button
+                  onClick={() => clearFilter()}
+                  className="btn btn-secondary flex-fill"
+                >
+                  Clear Filter
+                </button>
               </li>
               <li>
-                <button className="btn btn-secondary flex-fill">
+                <button
+                  onClick={() => updateFilter("status", "Contacted")}
+                  className="btn btn-secondary flex-fill"
+                >
                   Contacted
                 </button>
               </li>
               <li>
-                <button className="btn btn-secondary flex-fill">
+                <button
+                  onClick={() => updateFilter("status", "Qualified")}
+                  className="btn btn-secondary flex-fill"
+                >
                   Qualified
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => updateFilter("status", "New")}
+                  className="btn btn-secondary flex-fill"
+                >
+                  New
                 </button>
               </li>
               <li>

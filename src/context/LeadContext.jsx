@@ -13,7 +13,7 @@ export const LeadContextProvider = ({ children }) => {
     sortByAsc: true,
   });
   const [queryUrl, setQueryUrl] = useState(null);
-  console.log(queryUrl);
+  // console.log(queryUrl);
   const fetchLeads = (latestFilters) => {
     const params = new URLSearchParams();
 
@@ -40,7 +40,15 @@ export const LeadContextProvider = ({ children }) => {
       [key]: value,
     }));
   };
-
+  const clearFilter = () => {
+    setFilters((prev) => ({
+      salesAgent: "",
+      status: "",
+      tags: [],
+      source: "",
+      sortByAsc: true,
+    }));
+  };
   const {
     data,
     loading: leadDataloading,
@@ -62,6 +70,7 @@ export const LeadContextProvider = ({ children }) => {
     leadLoadingError,
     filters,
     updateFilter,
+    clearFilter,
   };
 
   return <LeadContext.Provider value={value}>{children}</LeadContext.Provider>;
