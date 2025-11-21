@@ -9,7 +9,7 @@ import AddLead from "./pages/AddLead.jsx";
 import SalesAgents from "./pages/SalesAgents.jsx";
 import AddSalesAgent from "./pages/AddSalesAgent.jsx";
 import SalesAgentsContextProvider from "./context/SalesAgentsContext.jsx";
-import LeadContextProvider from "./context/LeadContext.jsx";
+import { LeadContextProvider } from "./context/LeadContext.jsx";
 const route = createBrowserRouter([
   { path: "/", element: <App /> },
   { path: "/leads/:lead_id", element: <LeadManagement /> },
