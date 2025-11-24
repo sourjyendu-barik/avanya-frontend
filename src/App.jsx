@@ -18,6 +18,10 @@ function App() {
   const qualified_lead = lead_List.filter(
     (l) => l.status === "Qualified"
   ).length;
+  const proposal_Sent_lead = lead_List.filter(
+    (l) => l.status === "Proposal Sent"
+  ).length;
+  const closed_lead = lead_List.filter((l) => l.status === "Closed").length;
   return (
     <div className="body">
       <Header> Anvaya CRM Dashboard </Header>
@@ -54,6 +58,22 @@ function App() {
                   ` ${qualified_lead} leads`
                 )}
               </li>
+              <li>
+                Proposal Sent:
+                {leadDataloading ? (
+                  <span> loading...</span>
+                ) : (
+                  ` ${proposal_Sent_lead} leads`
+                )}
+              </li>
+              <li>
+                Closed:
+                {leadDataloading ? (
+                  <span> loading...</span>
+                ) : (
+                  ` ${closed_lead} leads`
+                )}
+              </li>
             </ul>
           </div>
           <div className="quick-filters">
@@ -88,6 +108,22 @@ function App() {
                   className="btn btn-secondary flex-fill"
                 >
                   New
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => updateFilter("status", "Closed")}
+                  className="btn btn-secondary flex-fill"
+                >
+                  Closed
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => updateFilter("status", "Proposal Sent")}
+                  className="btn btn-secondary flex-fill"
+                >
+                  Proposal Sent
                 </button>
               </li>
               <li>

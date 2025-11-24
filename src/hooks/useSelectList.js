@@ -19,6 +19,8 @@ const useSelectList = () => {
     { value: "New", label: "New" },
     { value: "Contacted", label: "Contacted" },
     { value: "Qualified", label: "Qualified" },
+    { value: "Closed", label: "Closed" },
+    { value: "Proposal Sent", label: "Proposal Sent" },
   ];
   const priorityList = [
     { value: "Low", label: "Low" },

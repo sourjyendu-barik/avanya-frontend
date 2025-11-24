@@ -9,7 +9,9 @@ import AddLead from "./pages/AddLead.jsx";
 import SalesAgents from "./pages/SalesAgents.jsx";
 import AddSalesAgent from "./pages/AddSalesAgent.jsx";
 import SalesAgentsContextProvider from "./context/SalesAgentsContext.jsx";
+import ReportContextProvider from "./context/ReportContext.jsx";
 import { LeadContextProvider } from "./context/LeadContext.jsx";
+import Reports from "./pages/Reports.jsx";
 const route = createBrowserRouter([
   { path: "/", element: <App /> },
   { path: "/leads/:lead_id", element: <LeadManagement /> },
@@ -17,12 +19,15 @@ const route = createBrowserRouter([
   { path: "/addLead", element: <AddLead /> },
   { path: "/salesAgents", element: <SalesAgents /> },
   { path: "/addNewAgent", element: <AddSalesAgent /> },
+  { path: "/reports", element: <Reports /> },
 ]);
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <LeadContextProvider>
       <SalesAgentsContextProvider>
-        <RouterProvider router={route} />
+        <ReportContextProvider>
+          <RouterProvider router={route} />
+        </ReportContextProvider>
       </SalesAgentsContextProvider>
     </LeadContextProvider>
   </StrictMode>
