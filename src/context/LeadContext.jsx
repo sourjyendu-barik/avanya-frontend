@@ -11,6 +11,7 @@ export const LeadContextProvider = ({ children }) => {
     tags: [],
     source: "",
     sortByAsc: true,
+    priority: "",
   });
   const [queryUrl, setQueryUrl] = useState(null);
   // console.log(queryUrl);
@@ -20,6 +21,8 @@ export const LeadContextProvider = ({ children }) => {
     if (latestFilters.salesAgent)
       params.set("salesAgent", latestFilters.salesAgent);
     if (latestFilters.status) params.set("status", latestFilters.status);
+    if (latestFilters.priority) params.set("priority", latestFilters.priority);
+
     if (latestFilters.source) params.set("source", latestFilters.source);
     params.set("sortByAsc", latestFilters.sortByAsc);
     if (latestFilters.tags.length > 0) {
@@ -47,6 +50,7 @@ export const LeadContextProvider = ({ children }) => {
       tags: [],
       source: "",
       sortByAsc: true,
+      priority: "",
     }));
   };
   const {
@@ -62,7 +66,11 @@ export const LeadContextProvider = ({ children }) => {
       setLead_List(data.data);
     }
   }, [data]);
-
+  const leadStatusDistribution = lead_List.reduce((acc, curr) => {
+    const status = curr.status;
+    acc[status] = (acc[status] || 0) + 1;
+    return acc;
+  }, {});
   const value = {
     lead_List,
     setLead_List,
@@ -71,6 +79,7 @@ export const LeadContextProvider = ({ children }) => {
     filters,
     updateFilter,
     clearFilter,
+    leadStatusDistribution,
   };
 
   return <LeadContext.Provider value={value}>{children}</LeadContext.Provider>;

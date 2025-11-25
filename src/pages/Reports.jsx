@@ -14,6 +14,7 @@ const Reports = () => {
           <h2>Report overview</h2>
           <TotalLeadsPiechart />
           <LeadsClosedBySalesAgent />
+          <LeadsStatusDistribution />
         </main>
       </div>
     </div>

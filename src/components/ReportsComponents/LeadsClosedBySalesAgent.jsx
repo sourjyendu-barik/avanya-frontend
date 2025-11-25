@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend,
   Title,
+  scales,
 } from "chart.js";
 
 ChartJS.register(
@@ -29,7 +30,7 @@ const LeadsClosedBySalesAgent = () => {
     labels: labelsX,
     datasets: [
       {
-        label: "Lead closed by sales agent",
+        label: "Lead Closed by sales agent",
         data: datay,
         backgroundColor: "#36A2EB",
       },
@@ -45,6 +46,14 @@ const LeadsClosedBySalesAgent = () => {
         text: "Leads closed by sales agent",
         font: { size: 18 },
         padding: { top: 10, bottom: 20 },
+      },
+    },
+    scales: {
+      y: {
+        ticks: {
+          precision: 0, // ⬅ No decimals ever
+          stepSize: 1,
+        },
       },
     },
   };

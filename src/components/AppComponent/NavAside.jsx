@@ -14,7 +14,14 @@ const NavAside = () => {
                 Leads
               </NavLink>
             </li>
-            <li className="nav-item mb-2 text-white">Sales</li>
+            <li className="nav-item mb-2">
+              <NavLink
+                to="/sales"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                Sales
+              </NavLink>
+            </li>
             <li className="nav-item mb-2 text-white">
               <NavLink
                 to="/salesAgents"

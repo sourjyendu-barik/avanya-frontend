@@ -13,7 +13,7 @@ const SelectDropDown = ({ label, options, value, onChange, isMultiFlag }) => {
         classNamePrefix="react-select"
         value={value}
         onChange={onChange}
-        menuPlacement="top"
+        menuPlacement="auto"
         isMulti={isMultiFlag}
       />
     </div>
