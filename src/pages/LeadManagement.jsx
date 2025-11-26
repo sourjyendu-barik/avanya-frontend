@@ -7,22 +7,33 @@ import UpdateLeadModal from "../components/UpdateLeadModal";
 import useSelectList from "../hooks/useSelectList";
 import axios from "axios";
 const LeadManagement = () => {
+  // code for retrigger api
+  const [triggerComment, setTriggerComment] = useState(false);
+  const [triggerLead, setTriggerLead] = useState(false);
+  //getting the data for select options
   const { salesAgentDataLoading, salesAgentDataLoadingError, sales_agentList } =
     useSelectList();
+  //getting the id from url
   const { lead_id } = useParams();
+
+  //current lead data
   const current_lead_data = useAxios(
-    `https://avanya-backend.vercel.app/getLeadData/${lead_id}`
+    `https://avanya-backend.vercel.app/getLeadData/${lead_id}?t=${triggerLead}`
   );
   const { data, loading, error } = current_lead_data;
   const current_lead = data?.data;
+
+  //comments data
   const comments = useAxios(
-    `https://avanya-backend.vercel.app/leads/${lead_id}/comments`
+    `https://avanya-backend.vercel.app/leads/${lead_id}/comments?t=${triggerComment}`
   );
   const {
     data: comments_data,
     loading: comments_loading,
     error: comments_error,
   } = comments;
+
+  // codes for adding comments
   const [commentsData, setComments_data] = useState({
     author: "",
     commentText: "",
@@ -47,7 +58,7 @@ const LeadManagement = () => {
         commentText: "",
         lead: lead_id,
       });
-      // refreshComments();
+      setTriggerComment(!triggerComment);
     } catch (error) {
       console.log(error.message);
       alert("error while saving comments");
@@ -185,6 +196,7 @@ const LeadManagement = () => {
             tags: Array.isArray(current_lead.tags) ? current_lead.tags : [],
             _id: current_lead._id,
           }}
+          setTriggerLead={setTriggerLead}
         />
       )}
     </div>

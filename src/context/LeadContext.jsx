@@ -14,6 +14,7 @@ export const LeadContextProvider = ({ children }) => {
     priority: "",
   });
   const [queryUrl, setQueryUrl] = useState(null);
+  const [trigger, setTrigger] = useState(false);
   // console.log(queryUrl);
   const fetchLeads = (latestFilters) => {
     const params = new URLSearchParams();
@@ -28,18 +29,17 @@ export const LeadContextProvider = ({ children }) => {
     if (latestFilters.tags.length > 0) {
       params.set("tags", latestFilters.tags.join(","));
     }
-
+    params.set("t", trigger);
     const newUrl = `https://avanya-backend.vercel.app/getAllLeads?${params.toString()}`;
     setQueryUrl(newUrl);
   };
 
-  // const [fetchtrigger, setFetchtrigger] = useState(false);
-  // const refetchLeads = () => {
-  //   setFetchtrigger(!fetchtrigger);
-  // };
+  const refetchLeads = () => {
+    setTrigger(!trigger);
+  };
   useEffect(() => {
     fetchLeads(filters);
-  }, [filters]);
+  }, [filters, trigger]);
 
   const updateFilter = (key, value) => {
     setFilters((prev) => ({
@@ -84,6 +84,7 @@ export const LeadContextProvider = ({ children }) => {
     updateFilter,
     clearFilter,
     leadStatusDistribution,
+    refetchLeads,
   };
 
   return <LeadContext.Provider value={value}>{children}</LeadContext.Provider>;

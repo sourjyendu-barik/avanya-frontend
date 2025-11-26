@@ -127,11 +127,13 @@ aside nav ul li {
     top: 0;
     bottom: auto;
     padding: 1rem;
+    margin-top: 0;
   }
 
   .main-page {
     margin-left: 0;
     width: 100%;
+    margin-top: 0;
 
     .quick-filters ul {
       gap: 0.5rem;

@@ -4,7 +4,9 @@ import Aside from "../components/Aside";
 import Select from "react-select";
 import axios from "axios";
 import LeadForm from "../components/LeadForm";
+import { useLeadContext } from "../context/LeadContext";
 const AddLead = () => {
+  const { refetchLeads } = useLeadContext();
   const defaultFormData = {
     name: "",
     source: "",
@@ -22,6 +24,7 @@ const AddLead = () => {
       );
       console.log(saved_formdata);
       alert("Added Lead data successfully");
+      refetchLeads();
     } catch (error) {
       console.log("Error while adding form data");
       alert("Error while adding lead data");

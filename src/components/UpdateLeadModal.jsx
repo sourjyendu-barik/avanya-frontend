@@ -2,7 +2,7 @@ import React from "react";
 import LeadForm from "./LeadForm";
 import axios from "axios";
 import { useLeadContext } from "../context/LeadContext";
-const UpdateLeadModal = ({ defaultdata }) => {
+const UpdateLeadModal = ({ defaultdata, setTriggerLead }) => {
   if (!defaultdata) {
     return null; // do not render modal until data arrives
   }
@@ -17,6 +17,7 @@ const UpdateLeadModal = ({ defaultdata }) => {
       console.log(updated_formdata);
       alert("Updated Lead data successfully");
       // refetchLeads();
+      setTriggerLead((prev) => !prev);
     } catch (error) {
       console.log("Error while updating lead data");
       alert("Error while updating lead data");
