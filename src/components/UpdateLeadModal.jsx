@@ -16,7 +16,7 @@ const UpdateLeadModal = ({ defaultdata }) => {
       );
       console.log(updated_formdata);
       alert("Updated Lead data successfully");
-      refetchLeads();
+      // refetchLeads();
     } catch (error) {
       console.log("Error while updating lead data");
       alert("Error while updating lead data");
