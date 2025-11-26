@@ -1,18 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import { useParams } from "react-router";
-import { Link } from "react-router";
 import Aside from "../components/Aside";
 import useAxios from "../hooks/useAxios";
 import UpdateLeadModal from "../components/UpdateLeadModal";
+import useSelectList from "../hooks/useSelectList";
+import axios from "axios";
 const LeadManagement = () => {
+  const { salesAgentDataLoading, salesAgentDataLoadingError, sales_agentList } =
+    useSelectList();
   const { lead_id } = useParams();
   const current_lead_data = useAxios(
     `https://avanya-backend.vercel.app/getLeadData/${lead_id}`
   );
   const { data, loading, error } = current_lead_data;
   const current_lead = data?.data;
+  const comments = useAxios(
+    `https://avanya-backend.vercel.app/leads/${lead_id}/comments`
+  );
+  const {
+    data: comments_data,
+    loading: comments_loading,
+    error: comments_error,
+  } = comments;
+  const [commentsData, setComments_data] = useState({
+    author: "",
+    commentText: "",
+    lead: lead_id,
+  });
+  const handleCommentsData = (e) => {
+    const { name, value } = e.target;
+    setComments_data((prev) => ({ ...prev, [name]: value }));
+  };
+  const handleformData = async (e) => {
+    e.preventDefault();
 
+    try {
+      const newCommentsData = await axios.post(
+        `https://avanya-backend.vercel.app/addComments`,
+        commentsData
+      );
+      console.log("savedData", newCommentsData);
+      alert("new Comments saved successfully");
+      setComments_data({
+        author: "",
+        commentText: "",
+        lead: lead_id,
+      });
+      // refreshComments();
+    } catch (error) {
+      console.log(error.message);
+      alert("error while saving comments");
+    }
+  };
+  //console.log(comments_data);
   return (
     <div className="body">
       <Header>Lead Management</Header>
@@ -62,27 +103,66 @@ const LeadManagement = () => {
 
           <div className="comment-section">
             <h2>Comments</h2>
-
-            <div className="card p-1">
-              <h5>John Doe , 12/12/2023</h5>
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Laborum aperiam quis doloribus repudiandae nostrum cum similique
-                dignissimos quidem iste at.
-              </p>
-            </div>
-
-            <form>
+            {comments_loading && <p>Comments is loading</p>}
+            {comments_error && <p>Error while fetching comments.</p>}
+            {comments_data &&
+              comments_data.data &&
+              comments_data.data.length === 0 && (
+                <p>Currently There are no Comments added</p>
+              )}
+            {comments_data?.data?.length > 0 &&
+              comments_data.data.map((data) => {
+                const { author, commentText, createdAt } = data;
+                return (
+                  <div className="card" key={data._id}>
+                    <div className="card-body">
+                      <div className="card-title">
+                        <h5>
+                          {author.name} ,{createdAt.split("T")[0]}
+                        </h5>
+                      </div>
+                      {commentText}
+                    </div>
+                  </div>
+                );
+              })}
+            <form onSubmit={handleformData}>
               <div className="mb-3">
                 <label htmlFor="comment" className="form-label fw-bold">
                   Add a New Comment
                 </label>
+                {salesAgentDataLoading && (
+                  <span>Salesagent data is loading</span>
+                )}
+                {salesAgentDataLoadingError && (
+                  <span>Error while data is loading</span>
+                )}
 
+                <select
+                  className="form-control mb-2"
+                  name="author"
+                  value={commentsData.author}
+                  id="author"
+                  onChange={handleCommentsData}
+                  required
+                >
+                  <option value="">Select Author</option>
+                  {sales_agentList.length > 0 &&
+                    sales_agentList.map((a, i) => (
+                      <option key={`option${i}`} value={a.value}>
+                        {a.label}
+                      </option>
+                    ))}
+                </select>
                 <textarea
                   id="comment"
                   className="form-control"
                   rows="4"
                   placeholder="Write your comment here..."
+                  name="commentText"
+                  value={commentsData.commentText}
+                  onChange={handleCommentsData}
+                  required
                 ></textarea>
               </div>
 
@@ -91,8 +171,6 @@ const LeadManagement = () => {
               </button>
             </form>
           </div>
-
-          <div className="comments"></div>
         </div>
       </div>
       {current_lead && (

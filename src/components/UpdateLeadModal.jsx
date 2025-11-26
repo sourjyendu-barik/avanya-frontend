@@ -1,10 +1,12 @@
 import React from "react";
 import LeadForm from "./LeadForm";
 import axios from "axios";
+import { useLeadContext } from "../context/LeadContext";
 const UpdateLeadModal = ({ defaultdata }) => {
   if (!defaultdata) {
     return null; // do not render modal until data arrives
   }
+  const { refetchLeads } = useLeadContext();
   const updateLead = async (leadFormData) => {
     try {
       const updated_formdata = await axios.post(
@@ -14,11 +16,13 @@ const UpdateLeadModal = ({ defaultdata }) => {
       );
       console.log(updated_formdata);
       alert("Updated Lead data successfully");
+      refetchLeads();
     } catch (error) {
       console.log("Error while updating lead data");
       alert("Error while updating lead data");
     }
   };
+
   return (
     <div
       className="modal fade"

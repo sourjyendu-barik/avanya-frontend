@@ -26,7 +26,6 @@ const AddLead = () => {
       console.log("Error while adding form data");
       alert("Error while adding lead data");
     }
-    form.clear();
   };
   return (
     <div className="body">

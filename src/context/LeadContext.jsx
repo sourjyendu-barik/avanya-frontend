@@ -33,6 +33,10 @@ export const LeadContextProvider = ({ children }) => {
     setQueryUrl(newUrl);
   };
 
+  // const [fetchtrigger, setFetchtrigger] = useState(false);
+  // const refetchLeads = () => {
+  //   setFetchtrigger(!fetchtrigger);
+  // };
   useEffect(() => {
     fetchLeads(filters);
   }, [filters]);
