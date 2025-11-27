@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
 import axios from "axios";
+import { toast } from "react-toastify";
 import { useSalesContext } from "../context/SalesAgentsContext";
-
 const AddSalesAgent = () => {
+  const { setTriggerSalesAgent } = useSalesContext();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,15 +20,17 @@ const AddSalesAgent = () => {
         "https://avanya-backend.vercel.app/addSalesAgent",
         formData
       );
-      console.log("Data added successfully", response.data);
-      alert("added data successfully");
+      // console.log("Data added successfully", response.data);
+      toast.success("Added New Sales Agent successfully");
+
       setFormData({
         name: "",
         email: "",
       });
+      setTriggerSalesAgent((prev) => !prev);
     } catch (error) {
-      console.log(error);
-      alert("error while adding salesman data");
+      // console.log(error);
+      toast.error(error.message);
     }
   };
   return (

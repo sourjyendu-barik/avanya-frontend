@@ -1,26 +1,32 @@
 import React from "react";
 import LeadForm from "./LeadForm";
 import axios from "axios";
-import { useLeadContext } from "../context/LeadContext";
+import { toast } from "react-toastify";
 const UpdateLeadModal = ({ defaultdata, setTriggerLead }) => {
   if (!defaultdata) {
-    return null; // do not render modal until data arrives
+    return null;
   }
-  const { refetchLeads } = useLeadContext();
   const updateLead = async (leadFormData) => {
     try {
       const updated_formdata = await axios.post(
         `https://avanya-backend.vercel.app/updateLeadData/${defaultdata._id}`,
-
         leadFormData
       );
-      console.log(updated_formdata);
-      alert("Updated Lead data successfully");
+      // console.log(updated_formdata);
+
+      toast.success("Updated Lead data successfully");
+
       // refetchLeads();
       setTriggerLead((prev) => !prev);
+
+      // //modal autoclose
+      // const modal = bootstrap.Modal.getInstance(
+      //   document.getElementById("addLeadModal")
+      // );
+      // if (modal) modal.hide();
     } catch (error) {
-      console.log("Error while updating lead data");
-      alert("Error while updating lead data");
+      // console.log("Error while updating lead data");
+      toast.error(error.message);
     }
   };
 

@@ -29,6 +29,7 @@ const LeadForm = ({ defaultdata, onSubmitFunction, buttonName }) => {
         onSubmit={(e) => {
           e.preventDefault();
           onSubmitFunction(leadFormData);
+          setLeadFormData(defaultdata);
         }}
       >
         {/* Lead Name */}
@@ -194,6 +195,7 @@ const LeadForm = ({ defaultdata, onSubmitFunction, buttonName }) => {
           type="submit"
           className="btn btn-primary d-flex m-auto justify-content-center"
           style={{ width: "40%" }}
+          data-bs-dismiss="modal"
         >
           {buttonName}
         </button>

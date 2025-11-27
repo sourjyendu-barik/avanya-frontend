@@ -13,6 +13,7 @@ import ReportContextProvider from "./context/ReportContext.jsx";
 import { LeadContextProvider } from "./context/LeadContext.jsx";
 import Reports from "./pages/Reports.jsx";
 import SalesPage from "./pages/SalesPage.jsx";
+import { ToastContainer } from "react-toastify";
 const route = createBrowserRouter([
   { path: "/", element: <App /> },
   { path: "/leads/:lead_id", element: <LeadManagement /> },
@@ -29,6 +30,7 @@ createRoot(document.getElementById("root")).render(
       <SalesAgentsContextProvider>
         <ReportContextProvider>
           <RouterProvider router={route} />
+          <ToastContainer position="top-center" autoClose={2000} />
         </ReportContextProvider>
       </SalesAgentsContextProvider>
     </LeadContextProvider>

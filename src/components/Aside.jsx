@@ -3,7 +3,7 @@ import { Link } from "react-router";
 const Aside = () => {
   return (
     <aside>
-      <Link to="/" className="btn btn-primary">
+      <Link to="/" className="btn btn-info">
         Back to Dashboard
       </Link>
     </aside>

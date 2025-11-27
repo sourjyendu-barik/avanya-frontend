@@ -6,6 +6,7 @@ import useAxios from "../hooks/useAxios";
 import UpdateLeadModal from "../components/UpdateLeadModal";
 import useSelectList from "../hooks/useSelectList";
 import axios from "axios";
+import { toast } from "react-toastify";
 const LeadManagement = () => {
   // code for retrigger api
   const [triggerComment, setTriggerComment] = useState(false);
@@ -51,17 +52,18 @@ const LeadManagement = () => {
         `https://avanya-backend.vercel.app/addComments`,
         commentsData
       );
-      console.log("savedData", newCommentsData);
-      alert("new Comments saved successfully");
+      // console.log("savedData", newCommentsData);
+      toast.success("new Comments saved successfully");
       setComments_data({
         author: "",
         commentText: "",
         lead: lead_id,
       });
+
       setTriggerComment(!triggerComment);
     } catch (error) {
-      console.log(error.message);
-      alert("error while saving comments");
+      //  console.log(error.message);
+      toast.error(error.message);
     }
   };
   //console.log(comments_data);

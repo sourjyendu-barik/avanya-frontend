@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
 import Aside from "../components/Aside";
-import Select from "react-select";
 import axios from "axios";
 import LeadForm from "../components/LeadForm";
 import { useLeadContext } from "../context/LeadContext";
+import { toast } from "react-toastify";
 const AddLead = () => {
   const { refetchLeads } = useLeadContext();
   const defaultFormData = {
@@ -22,12 +22,12 @@ const AddLead = () => {
         "https://avanya-backend.vercel.app/addNewLead",
         leadFormData
       );
-      console.log(saved_formdata);
-      alert("Added Lead data successfully");
+      // console.log(saved_formdata);
+      toast.success("Added Lead data successfully");
       refetchLeads();
     } catch (error) {
-      console.log("Error while adding form data");
-      alert("Error while adding lead data");
+      // console.log("Error while adding form data");
+      toast.error("Error while adding lead data", error.message);
     }
   };
   return (

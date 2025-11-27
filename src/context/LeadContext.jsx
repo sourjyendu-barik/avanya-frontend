@@ -16,7 +16,7 @@ export const LeadContextProvider = ({ children }) => {
   const [queryUrl, setQueryUrl] = useState(null);
   const [trigger, setTrigger] = useState(false);
   // console.log(queryUrl);
-  const fetchLeads = (latestFilters) => {
+  const createUrl = (latestFilters) => {
     const params = new URLSearchParams();
 
     if (latestFilters.salesAgent)
@@ -38,7 +38,7 @@ export const LeadContextProvider = ({ children }) => {
     setTrigger(!trigger);
   };
   useEffect(() => {
-    fetchLeads(filters);
+    createUrl(filters);
   }, [filters, trigger]);
 
   const updateFilter = (key, value) => {

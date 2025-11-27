@@ -1,10 +1,7 @@
 :root {
-  --bs-primary: var(--bs-blue);
-  --bs-secondary: var(--bs-gray-600);
-  --bs-info: var(--bs-cyan);
-  --bs-warning: var(--bs-yellow);
-  --bs-dark: var(--bs-gray-900);
-  --bs-white: #fff;
+  --bs-first: #6291c1;
+  --bs-second: #c15e9b;
+  --bs-white: white;
 }
 
 * {
@@ -26,7 +23,7 @@ header {
   left: 0;
   right: 0;
   z-index: 1000;
-  background-color: var(--bs-primary);
+  background-color: var(--bs-first);
   text-align: center;
   color: var(--bs-white);
   font-size: 3rem;
@@ -47,7 +44,7 @@ ul {
 aside {
   width: 20rem;
   padding: 2rem;
-  background-color: var(--bs-secondary);
+  background-color: var(--bs-second);
   position: fixed;
   top: 7.5rem;
   bottom: 0;
@@ -116,33 +113,42 @@ aside nav ul li {
   gap: 1rem;
 }
 @media (max-width: 868px) {
+  .body {
+    padding-top: 0 !important;
+  }
+
+  header {
+    padding: 1rem !important;
+  }
+
   .page-content {
     flex-direction: column;
-    height: auto;
+    height: auto !important;
+    margin-top: 0 !important;
   }
 
   aside {
     width: 100%;
     position: relative;
-    top: 0;
+    top: 0 !important;
     bottom: auto;
     padding: 1rem;
-    margin-top: 0;
+    margin: 0 !important;
   }
 
   .main-page {
     margin-left: 0;
     width: 100%;
     margin-top: 0;
+  }
 
-    .quick-filters ul {
-      gap: 0.5rem;
-      display: flex;
-      flex-direction: column;
-      /* flex-wrap: wrap; */
-    }
-    .quick-filters ul li:last-child {
-      margin-left: 0;
-    }
+  .quick-filters ul {
+    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .quick-filters ul li:last-child {
+    margin-left: 0;
   }
 }

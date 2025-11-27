@@ -31,7 +31,7 @@ const AppComponentCards = () => {
           <div className="row g-3">
             {lead_List.map((info, index) => (
               <div
-                className="col-md-4"
+                className="col-md-3"
                 key={`lead-${index}`}
                 style={{ cursor: "pointer" }}
               >
