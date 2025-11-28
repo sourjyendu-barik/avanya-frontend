@@ -70,7 +70,7 @@ const Settings = () => {
                     <span
                       onClick={() => {
                         toast.success("Deleted Lead Data Successfully");
-                        deleteAgent(l._id);
+                        deleteAgent(a._id);
                       }}
                     >
                       🗑️
