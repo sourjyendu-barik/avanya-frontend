@@ -84,7 +84,8 @@ const LeadManagement = () => {
                   Lead Name: {current_lead.name}
                 </li>
                 <li className="list-group-item">
-                  Sales agent: {current_lead.salesAgent?.name}
+                  Sales Agent:{" "}
+                  {current_lead?.salesAgent?.name ?? "Deleted User"}
                 </li>
                 <li className="list-group-item">
                   Lead Source: {current_lead.source}
@@ -131,7 +132,8 @@ const LeadManagement = () => {
                     <div className="card-body">
                       <div className="card-title">
                         <h5>
-                          {author.name} ,{createdAt.split("T")[0]}
+                          {author?.name ?? "Deleted User"} ,
+                          {createdAt?.split("T")[0] ?? ""}
                         </h5>
                       </div>
                       {commentText}
