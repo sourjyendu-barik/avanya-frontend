@@ -14,6 +14,7 @@ import { LeadContextProvider } from "./context/LeadContext.jsx";
 import Reports from "./pages/Reports.jsx";
 import SalesPage from "./pages/SalesPage.jsx";
 import { ToastContainer } from "react-toastify";
+import Settings from "./pages/Settings.jsx";
 const route = createBrowserRouter([
   { path: "/", element: <App /> },
   { path: "/leads/:lead_id", element: <LeadManagement /> },
@@ -23,6 +24,7 @@ const route = createBrowserRouter([
   { path: "/addNewAgent", element: <AddSalesAgent /> },
   { path: "/reports", element: <Reports /> },
   { path: "/sales", element: <SalesPage /> },
+  { path: "/settings", element: <Settings /> },
 ]);
 createRoot(document.getElementById("root")).render(
   <StrictMode>

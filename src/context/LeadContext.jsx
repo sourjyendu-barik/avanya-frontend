@@ -1,6 +1,6 @@
 import React, { useEffect, useState, createContext, useContext } from "react";
 import useAxios from "../hooks/useAxios";
-
+import useAxiosDelete from "../hooks/useAxiosDelete";
 const LeadContext = createContext();
 export const useLeadContext = () => useContext(LeadContext);
 
@@ -75,16 +75,44 @@ export const LeadContextProvider = ({ children }) => {
     acc[status] = (acc[status] || 0) + 1;
     return acc;
   }, {});
+
+  const {
+    deleteRequest,
+    delete_data,
+    loading: deleting_leadData,
+    error: deleting_leadData_error,
+  } = useAxiosDelete();
+
+  const deleteLead = async (id) => {
+    try {
+      const res = await deleteRequest(
+        `https://avanya-backend.vercel.app/deleteLead/${id}`
+      );
+
+      setTrigger((prev) => !prev);
+
+      return res;
+    } catch (err) {
+      console.error("Delete failed:", err);
+    }
+  };
   const value = {
+    // leadlist rendering
     lead_List,
     setLead_List,
     leadDataloading,
     leadLoadingError,
+    //
     filters,
     updateFilter,
     clearFilter,
     leadStatusDistribution,
     refetchLeads,
+    //deleting
+    deleteLead,
+    delete_data,
+    deleting_leadData,
+    deleting_leadData_error,
   };
 
   return <LeadContext.Provider value={value}>{children}</LeadContext.Provider>;

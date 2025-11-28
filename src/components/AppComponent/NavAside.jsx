@@ -38,7 +38,14 @@ const NavAside = () => {
                 Reports
               </NavLink>
             </li>
-            <li className="nav-item mb-2 text-white">Setting</li>
+            <li className="nav-item mb-2 text-white">
+              <NavLink
+                to="/settings"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                Settings
+              </NavLink>
+            </li>
           </ul>
         </nav>
       </div>

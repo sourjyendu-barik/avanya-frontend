@@ -35,7 +35,7 @@ const AddSalesAgent = () => {
   };
   return (
     <div className="body">
-      <Header>| Add New Sales Agent |</Header>
+      <Header> Add New Sales Agent </Header>
       <div className="page-content">
         <div className="main-page">
           <form onSubmit={handleFotmData} className="p-3">
