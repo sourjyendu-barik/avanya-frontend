@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Aside from "../components/Aside";
 import { useLeadContext } from "../context/LeadContext";
 import { useSalesContext } from "../context/SalesAgentsContext";
+import { toast } from "react-toastify";
 const Settings = () => {
   const {
     lead_List,
@@ -26,6 +27,7 @@ const Settings = () => {
         <Aside />
         <div className="main-page">
           {/* lead list  */}
+          <h2>Lead List</h2>
           <table>
             <tbody>
               <tr>
@@ -38,13 +40,21 @@ const Settings = () => {
                   <td>{l.name}</td>
                   <td>{l.status}</td>
                   <td>
-                    <span onClick={() => deleteLead(l._id)}>🗑️</span>
+                    <span
+                      onClick={() => {
+                        toast.success("Deleted Lead Data Successfully");
+                        deleteLead(l._id);
+                      }}
+                    >
+                      🗑️
+                    </span>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
           {/* salesAgent list */}
+          <h2>Sales Agent List</h2>
           <table>
             <tbody>
               <tr>
@@ -52,12 +62,19 @@ const Settings = () => {
                 <th>Sales Agent</th>
                 <th>Action</th>
               </tr>
-              {SalesAgents_List.map((l) => (
-                <tr key={l._id}>
-                  <td>{l.name}</td>
-                  <td>{l.email}</td>
+              {SalesAgents_List.map((a) => (
+                <tr key={a._id}>
+                  <td>{a.name}</td>
+                  <td>{a.email}</td>
                   <td>
-                    <span onClick={() => deleteAgent(l._id)}>🗑️</span>
+                    <span
+                      onClick={() => {
+                        toast.success("Deleted Lead Data Successfully");
+                        deleteAgent(l._id);
+                      }}
+                    >
+                      🗑️
+                    </span>
                   </td>
                 </tr>
               ))}
