@@ -41,7 +41,7 @@ const LeadlistTable = () => {
                 <td>{lead.name}</td>
                 <td>{lead.status}</td>
                 <td>{lead.source}</td>
-                <td>{lead.priority}</td>
+                <td style={{ textAlign: "center" }}>{lead.priority}</td>
               </tr>
             ))}
           </tbody>
