@@ -25,7 +25,7 @@ export const LeadContextProvider = ({ children }) => {
     if (latestFilters.priority) params.set("priority", latestFilters.priority);
 
     if (latestFilters.source) params.set("source", latestFilters.source);
-    params.set("sortByAsc", latestFilters.sortByAsc);
+    params.set("sortByAsc", latestFilters.sortByAsc.toString());
     if (latestFilters.tags.length > 0) {
       params.set("tags", latestFilters.tags.join(","));
     }
