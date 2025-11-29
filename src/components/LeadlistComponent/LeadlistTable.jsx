@@ -27,9 +27,9 @@ const LeadlistTable = () => {
           <thead>
             <tr>
               <th>Lead Name</th>
-              <th>Lead Status</th>
-              <th>Lead Source</th>
-              <th>Lead Priority</th>
+              <th> Status</th>
+              <th> Source</th>
+              <th> Priority</th>
             </tr>
           </thead>
           <tbody>
