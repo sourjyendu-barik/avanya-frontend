@@ -24,10 +24,11 @@ const Settings = () => {
   console.log(lead_List);
   return (
     <div className="body">
-      <Header>Lead List</Header>
+      <Header>Settings</Header>
       <div className="page-content">
         <Aside />
         <div className="main-page">
+          <h1>Lead List and Sales Agent List</h1>
           {/* lead list  */}
           <div>
             <h2>Lead List</h2>

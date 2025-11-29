@@ -13,11 +13,11 @@ const useAxiosDelete = () => {
     try {
       const res = await axios.delete(url);
       setDeleteData(res.data);
-      return res.data; // allow caller to await response
+      return res.data; 
     } catch (err) {
       setError(err);
       console.error(err);
-      throw err; // optional: rethrow so caller can handle
+      throw err; 
     } finally {
       setLoading(false);
     }

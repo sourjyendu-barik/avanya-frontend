@@ -36,7 +36,7 @@ const AppComponentCards = () => {
                 style={{ cursor: "pointer" }}
               >
                 <Link to={`/leads/${info._id}`} className="link">
-                  <div className="card">
+                  <div className="card h-100">
                     <div className="card-body">
                       <h5>{info.name}</h5>
                     </div>

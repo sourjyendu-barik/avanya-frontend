@@ -48,7 +48,8 @@ header {
 .page-content {
   display: flex;
   flex: 1;
-  height: calc(100vh - 8rem);
+  height: auto;
+  min-height: auto;
 }
 
 /* =========================
