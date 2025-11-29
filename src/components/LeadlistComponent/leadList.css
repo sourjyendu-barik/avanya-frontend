@@ -2,22 +2,24 @@ table {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
-  font-size: large;
 }
 
 th {
-  padding: 0.7rem 0.5rem;
   background-color: var(--bs-dark);
   color: var(--bs-white);
+  padding: 0 0.2rem;
 }
 
 td {
-  padding: 0.2rem 0.5rem;
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   table {
-    width: 100%;
+    font-size: large;
+  }
+
+  th {
+    padding: 0.7rem 0.5rem;
   }
 }
