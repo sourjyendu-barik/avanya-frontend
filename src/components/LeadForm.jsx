@@ -15,12 +15,20 @@ const LeadForm = ({ defaultdata, onSubmitFunction, buttonName }) => {
 
   const [leadFormData, setLeadFormData] = useState(defaultdata);
 
-  // React.useEffect(() => {
-  //   setLeadFormData(defaultdata);
-  // }, [defaultdata]);
-
   const handleChange = (name, value) => {
-    setLeadFormData((prev) => ({ ...prev, [name]: value }));
+    setLeadFormData((prev) => {
+      if (name === "status" && value === "Closed") {
+        return {
+          ...prev,
+          status: value,
+          timeToClose: 0,
+        };
+      }
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
   };
   return (
     <div>

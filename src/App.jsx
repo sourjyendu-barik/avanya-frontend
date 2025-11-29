@@ -9,29 +9,14 @@ import { Link } from "react-router";
 import { useLeadContext } from "./context/LeadContext";
 import SelectDropDown from "./components/LeadlistComponent/SelectDropDown";
 import useSelectList from "./hooks/useSelectList";
-// import { useEffect } from "react";
-// import { useLocation } from "react-router";
+
 import useRefresh from "./hooks/useRefresh";
 function App() {
-  const { lead_List, leadDataloading, updateFilter, clearFilter, filters } =
-    useLeadContext();
+  const { updateFilter, filters, leadStatusDistribution } = useLeadContext();
   const { leadStatusList } = useSelectList();
-  // const location = useLocation();
-  // useEffect(() => {
-  //   clearFilter();
-  // }, [location.pathname]);
+
   useRefresh();
-  const new_lead = lead_List.filter((l) => l.status === "New").length;
-  const contacted_lead = lead_List.filter(
-    (l) => l.status === "Contacted"
-  ).length;
-  const qualified_lead = lead_List.filter(
-    (l) => l.status === "Qualified"
-  ).length;
-  const proposal_Sent_lead = lead_List.filter(
-    (l) => l.status === "Proposal Sent"
-  ).length;
-  const closed_lead = lead_List.filter((l) => l.status === "Closed").length;
+
   return (
     <div className="body">
       <Header> Anvaya CRM Dashboard </Header>
@@ -42,48 +27,11 @@ function App() {
           <div className="lead-status mt-4">
             <h3>Status:</h3>
             <ul>
-              <li>
-                New:
-                {leadDataloading ? (
-                  <span> loading...</span>
-                ) : (
-                  ` ${new_lead} leads`
-                )}
-              </li>
-
-              <li>
-                Contacted:
-                {leadDataloading ? (
-                  <span> loading...</span>
-                ) : (
-                  ` ${contacted_lead} leads`
-                )}
-              </li>
-
-              <li>
-                Qualified:
-                {leadDataloading ? (
-                  <span> loading...</span>
-                ) : (
-                  ` ${qualified_lead} leads`
-                )}
-              </li>
-              <li>
-                Proposal Sent:
-                {leadDataloading ? (
-                  <span> loading...</span>
-                ) : (
-                  ` ${proposal_Sent_lead} leads`
-                )}
-              </li>
-              <li>
-                Closed:
-                {leadDataloading ? (
-                  <span> loading...</span>
-                ) : (
-                  ` ${closed_lead} leads`
-                )}
-              </li>
+              {Object.keys(leadStatusDistribution).map((k) => (
+                <li key={k}>
+                  {k} : {leadStatusDistribution[k]}
+                </li>
+              ))}
             </ul>
           </div>
           <div className="row g-3 d-flex justify-content-between align-items-end">

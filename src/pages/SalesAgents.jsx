@@ -36,13 +36,11 @@ const SalesAgents = () => {
                   ))}
                 </tbody>
               </table>
-              <Link
-                to={`/addNewAgent`}
-                className="btn btn-primary"
-                style={{ alignSelf: "flex-end" }}
-              >
-                Add New Agent
-              </Link>
+              <div className="d-flex justify-content-end mt-3 me-4">
+                <Link to={`/addNewAgent`} className="btn btn-primary">
+                  Add New Agent
+                </Link>
+              </div>
             </div>
           )}
         </div>

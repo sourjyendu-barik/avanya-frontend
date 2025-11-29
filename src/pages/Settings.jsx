@@ -4,7 +4,9 @@ import Aside from "../components/Aside";
 import { useLeadContext } from "../context/LeadContext";
 import { useSalesContext } from "../context/SalesAgentsContext";
 import { toast } from "react-toastify";
+import useRefresh from "../hooks/useRefresh";
 const Settings = () => {
+  useRefresh();
   const {
     lead_List,
     deleteLead,

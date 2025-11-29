@@ -73,7 +73,8 @@ const AddSalesAgent = () => {
                 />
               </div>
             </div>
-            <button type="submit" className="btn btn-primary">
+
+            <button type="submit" className="btn btn-secondary">
               Create New Agent
             </button>
           </form>
