@@ -6,8 +6,14 @@ import { useLeadContext } from "../context/LeadContext";
 import LeadlistTable from "../components/LeadlistComponent/LeadlistTable";
 import useSelectList from "../hooks/useSelectList";
 import SelectDropDown from "../components/LeadlistComponent/SelectDropDown";
+import { useLocation } from "react-router";
+import { useEffect } from "react";
 const SalesPage = () => {
   const { filters, updateFilter, clearFilter } = useLeadContext();
+  const location = useLocation();
+  useEffect(() => {
+    clearFilter();
+  }, [location.pathname]);
   const {
     salesAgentDataLoading,
     salesAgentDataLoadingError,
@@ -35,7 +41,7 @@ const SalesPage = () => {
 
             <SelectDropDown
               label={"Leads List By Sales Agent"}
-              options={sales_agentList}
+              options={[...sales_agentList, { label: "All", value: "" }]}
               value={
                 sales_agentList.find((o) => o.value === filters.salesAgent) ||
                 null
@@ -44,15 +50,15 @@ const SalesPage = () => {
                 updateFilter("salesAgent", selected?.value)
               }
             />
+            <LeadlistTable />
           </div>
-          <LeadlistTable />
 
-          <div className="quick-filters">
-            <ul>
-              <li>
+          <div>
+            <ul className="row g-2">
+              <li className="col-12 col-md-6 col-lg-4 col-xl-4">
                 <SelectDropDown
                   label="Lead Status"
-                  options={leadStatusList}
+                  options={[...leadStatusList, { label: "All", value: "" }]}
                   value={
                     leadStatusList.find((o) => o.value === filters.status) ||
                     null
@@ -62,10 +68,10 @@ const SalesPage = () => {
                   }
                 />
               </li>
-              <li>
+              <li className="col-12 col-md-6 col-lg-4 col-xl-4">
                 <SelectDropDown
                   label="Priority"
-                  options={priorityList}
+                  options={[...priorityList, { label: "All", value: "" }]}
                   value={
                     priorityList.find((o) => o.value === filters.priority) ||
                     null
@@ -75,7 +81,7 @@ const SalesPage = () => {
                   }
                 />
               </li>
-              <li>
+              <li className="col-12 col-md-6 col-lg-4 col-xl-4">
                 <SelectDropDown
                   label="Sort By"
                   options={sortOptions}
@@ -87,15 +93,6 @@ const SalesPage = () => {
                     updateFilter("sortByAsc", selected?.value)
                   }
                 />
-              </li>
-              <li>
-                <button
-                  className="btn btn-secondary"
-                  style={{ position: "relative", top: "1.8rem" }}
-                  onClick={() => clearFilter()}
-                >
-                  Clear Filter
-                </button>
               </li>
             </ul>
           </div>

@@ -7,10 +7,18 @@ import AppComponentCards from "./components/AppComponent/AppComponentCards";
 import NavAside from "./components/AppComponent/NavAside";
 import { Link } from "react-router";
 import { useLeadContext } from "./context/LeadContext";
+import SelectDropDown from "./components/LeadlistComponent/SelectDropDown";
+import useSelectList from "./hooks/useSelectList";
+import { useEffect } from "react";
+import { useLocation } from "react-router";
 function App() {
-  const { lead_List, leadDataloading, updateFilter, clearFilter } =
+  const { lead_List, leadDataloading, updateFilter, clearFilter, filters } =
     useLeadContext();
-
+  const { leadStatusList } = useSelectList();
+  const location = useLocation();
+  useEffect(() => {
+    clearFilter();
+  }, [location.pathname]);
   const new_lead = lead_List.filter((l) => l.status === "New").length;
   const contacted_lead = lead_List.filter(
     (l) => l.status === "Contacted"
@@ -76,62 +84,23 @@ function App() {
               </li>
             </ul>
           </div>
-          <div className="quick-filters">
-            <ul>
-              <li>
-                <button
-                  onClick={() => clearFilter()}
-                  className="btn btn-secondary flex-fill"
-                >
-                  Clear Filter
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => updateFilter("status", "Contacted")}
-                  className="btn btn-secondary flex-fill"
-                >
-                  Contacted
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => updateFilter("status", "Qualified")}
-                  className="btn btn-secondary flex-fill"
-                >
-                  Qualified
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => updateFilter("status", "New")}
-                  className="btn btn-secondary flex-fill"
-                >
-                  New
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => updateFilter("status", "Closed")}
-                  className="btn btn-secondary flex-fill"
-                >
-                  Closed
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => updateFilter("status", "Proposal Sent")}
-                  className="btn btn-secondary flex-fill"
-                >
-                  Proposal Sent
-                </button>
-              </li>
-              <li>
-                <Link to="/addLead" className="btn btn-secondary flex-fill">
-                  Add New Lead
-                </Link>
-              </li>
-            </ul>
+          <div className="row g-3 d-flex justify-content-between align-items-end">
+            <div className="col-12 col-md-6 col-lg-4 col-xl-3">
+              <SelectDropDown
+                label="Lead Status"
+                options={[...leadStatusList, { label: "All", value: "" }]}
+                value={
+                  leadStatusList.find((o) => o.value === filters.status) || null
+                }
+                onChange={(selected) => updateFilter("status", selected?.value)}
+              />
+            </div>
+
+            <div className="col-12 col-md-6 col-lg-4 col-xl-3 d-flex align-items-end">
+              <Link to="/addLead" className="btn btn-secondary w-100">
+                Add New Lead
+              </Link>
+            </div>
           </div>
         </main>
       </div>

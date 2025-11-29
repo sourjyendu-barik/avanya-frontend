@@ -1,18 +1,17 @@
 import React from "react";
 import SelectDropDown from "./SelectDropDown";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 import useSelectList from "../../hooks/useSelectList";
 import Select from "react-select";
 import { useLeadContext } from "../../context/LeadContext";
 const LeadlistFilter = () => {
-  const navigate = useNavigate();
-  const { filters, updateFilter, clearFilter } = useLeadContext();
+  // const navigate = useNavigate();
+  const { filters, updateFilter } = useLeadContext();
   const {
     salesAgentDataLoading,
     salesAgentDataLoadingError,
     leadSourceList,
     leadStatusList,
-    priorityList,
     sales_agentList,
     tag_list,
   } = useSelectList();
@@ -23,14 +22,9 @@ const LeadlistFilter = () => {
   ];
 
   return (
-    <div className="quick-filters">
-      {/* salesAgent: "",
-    status: "",
-    tags: [],
-    source: "",
-    sortByAsc: true, */}
-      <ul>
-        <li>
+    <div>
+      <ul className="row g-2">
+        <li className="col-12 col-md-6 col-lg-4 col-xl-2">
           {salesAgentDataLoading && <span>Salesagent data is loading</span>}
           {salesAgentDataLoadingError && (
             <span>Error while data is loading</span>
@@ -39,7 +33,7 @@ const LeadlistFilter = () => {
           {/* onChange={(selected) => handleChange("salesAgent", selected?.value)} */}
           <SelectDropDown
             label={"Sales agent"}
-            options={sales_agentList}
+            options={[...sales_agentList, { label: "All", value: "" }]}
             value={
               sales_agentList.find((o) => o.value === filters.salesAgent) ||
               null
@@ -47,17 +41,17 @@ const LeadlistFilter = () => {
             onChange={(selected) => updateFilter("salesAgent", selected?.value)}
           />
         </li>
-        <li>
+        <li className="col-12 col-md-6 col-lg-4 col-xl-2">
           <SelectDropDown
             label="Lead Status"
-            options={leadStatusList}
+            options={[...leadStatusList, { label: "All", value: "" }]}
             value={
               leadStatusList.find((o) => o.value === filters.status) || null
             }
             onChange={(selected) => updateFilter("status", selected?.value)}
           />
         </li>
-        <li>
+        <li className="col-12 col-md-6 col-lg-4 col-xl-2">
           <div className="mb-2 flex-fill">
             <label htmlFor={"tag"} className="form-label fw-semibold">
               Tags:
@@ -79,17 +73,17 @@ const LeadlistFilter = () => {
             />
           </div>
         </li>
-        <li>
+        <li className="col-12 col-md-6 col-lg-4 col-xl-2">
           <SelectDropDown
             label="Lead Source"
-            options={leadSourceList}
+            options={[...leadSourceList, { label: "All", value: "" }]}
             value={
               leadSourceList.find((o) => o.value === filters.source) || null
             }
             onChange={(selected) => updateFilter("source", selected?.value)}
           />
         </li>
-        <li>
+        <li className="col-12 col-md-6 col-lg-4 col-xl-2">
           <SelectDropDown
             label="Sort By"
             options={sortOptions}
@@ -98,24 +92,6 @@ const LeadlistFilter = () => {
             }
             onChange={(selected) => updateFilter("sortByAsc", selected?.value)}
           />
-        </li>
-        <li>
-          <button
-            className="btn btn-secondary"
-            style={{ position: "relative", top: "1.8rem" }}
-            onClick={() => navigate("/addLead")}
-          >
-            Add New Lead
-          </button>
-        </li>
-        <li>
-          <button
-            className="btn btn-secondary"
-            style={{ position: "relative", top: "1.8rem" }}
-            onClick={() => clearFilter()}
-          >
-            Clear Filter
-          </button>
         </li>
       </ul>
     </div>

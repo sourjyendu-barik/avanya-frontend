@@ -15,9 +15,9 @@ const LeadForm = ({ defaultdata, onSubmitFunction, buttonName }) => {
 
   const [leadFormData, setLeadFormData] = useState(defaultdata);
 
-  React.useEffect(() => {
-    setLeadFormData(defaultdata);
-  }, [defaultdata]);
+  // React.useEffect(() => {
+  //   setLeadFormData(defaultdata);
+  // }, [defaultdata]);
 
   const handleChange = (name, value) => {
     setLeadFormData((prev) => ({ ...prev, [name]: value }));

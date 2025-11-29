@@ -13,7 +13,7 @@ const AddLead = () => {
     salesAgent: "",
     status: "",
     tags: [], // array of strings
-    timeToClose: 0,
+    timeToClose: "",
     priority: "",
   };
   const handleForm = async (leadFormData) => {

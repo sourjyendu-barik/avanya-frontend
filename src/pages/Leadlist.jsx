@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../components/Header";
 import LeadlistTable from "../components/LeadlistComponent/LeadlistTable";
 import Aside from "../components/Aside";
 import LeadlistFilter from "../components/LeadlistComponent/LeadlistFilter";
 import "../components/LeadlistComponent/leadList.css";
+import { useLeadContext } from "../context/LeadContext";
+import { useLocation } from "react-router";
 const Leadlist = () => {
+  const { clearFilter } = useLeadContext();
+  const location = useLocation();
+  useEffect(() => {
+    clearFilter();
+  }, [location.pathname]);
   return (
     <div className="body">
       <Header>Lead List</Header>
       <div className="page-content">
         <Aside />
-        <div className="main-page">
+        <div className="main-page mb-3">
           <LeadlistTable />
           <LeadlistFilter />
         </div>

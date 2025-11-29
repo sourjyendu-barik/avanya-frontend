@@ -55,7 +55,7 @@ header {
    Sidebar (Aside)
    ========================= */
 aside {
-  width: 20rem;
+  width: 15rem;
   padding: 2rem;
   background-color: var(--bs-second);
   position: fixed;
@@ -77,12 +77,15 @@ aside nav ul li {
   font-weight: bold;
   color: var(--bs-white);
 }
+.leads .link {
+  text-decoration: none !important;
+}
 
 /* =========================
    Main Page
    ========================= */
 .main-page {
-  margin-left: 320px; /* space for aside */
+  margin-left: 240px; /* space for aside */
   flex: 1;
   overflow-y: auto;
   padding: 1rem;
@@ -104,24 +107,17 @@ ul {
   padding-left: 0 !important;
 }
 
-.quick-filters ul {
-  gap: 0.5rem;
-  display: flex;
-}
+/* =========================
+   NOTE: Filter CSS removed because Bootstrap grid handles layout
+   ========================= */
 
-.quick-filters li {
-  flex: 1;
-}
+/* No more .quick-filters ul { display:flex } */
+/* No more .quick-filters li { flex:1 } */
+/* No mobile override for filters */
 
-.quick-filters li .btn {
-  width: 100%;
-}
-
-.link {
-  text-decoration: none;
-  color: inherit;
-}
-
+/* =========================
+   Lead Details
+   ========================= */
 .lead-details {
   font-size: 1rem;
   display: flex;
@@ -129,6 +125,9 @@ ul {
   gap: 1rem;
 }
 
+/* =========================
+   Comment Section
+   ========================= */
 .comment-section {
   display: flex;
   flex-direction: column;
@@ -138,7 +137,7 @@ ul {
 /* =========================
    Mobile Responsive Layout
    ========================= */
-@media (max-width: 868px) {
+@media (max-width: 1100px) {
   .body {
     padding-top: 4.5rem !important; /* smaller header on mobile */
   }
@@ -167,14 +166,5 @@ ul {
     margin-left: 0;
     width: 100%;
     margin-top: 0;
-  }
-
-  .quick-filters ul {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .quick-filters ul li:last-child {
-    margin-left: 0;
   }
 }
