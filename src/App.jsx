@@ -9,16 +9,18 @@ import { Link } from "react-router";
 import { useLeadContext } from "./context/LeadContext";
 import SelectDropDown from "./components/LeadlistComponent/SelectDropDown";
 import useSelectList from "./hooks/useSelectList";
-import { useEffect } from "react";
-import { useLocation } from "react-router";
+// import { useEffect } from "react";
+// import { useLocation } from "react-router";
+import useRefresh from "./hooks/useRefresh";
 function App() {
   const { lead_List, leadDataloading, updateFilter, clearFilter, filters } =
     useLeadContext();
   const { leadStatusList } = useSelectList();
-  const location = useLocation();
-  useEffect(() => {
-    clearFilter();
-  }, [location.pathname]);
+  // const location = useLocation();
+  // useEffect(() => {
+  //   clearFilter();
+  // }, [location.pathname]);
+  useRefresh();
   const new_lead = lead_List.filter((l) => l.status === "New").length;
   const contacted_lead = lead_List.filter(
     (l) => l.status === "Contacted"

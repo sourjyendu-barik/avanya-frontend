@@ -14,6 +14,7 @@ const LeadlistFilter = () => {
     leadStatusList,
     sales_agentList,
     tag_list,
+    priorityList,
   } = useSelectList();
   // console.log(filters);
   const sortOptions = [
@@ -91,6 +92,16 @@ const LeadlistFilter = () => {
               sortOptions.find((o) => o.value === filters.sortByAsc) || null
             }
             onChange={(selected) => updateFilter("sortByAsc", selected?.value)}
+          />
+        </li>
+        <li className="col-12 col-md-6 col-lg-4 col-xl-2">
+          <SelectDropDown
+            label="Priority"
+            options={[...priorityList, { value: "", label: "All" }]}
+            value={
+              priorityList.find((o) => o.value === filters.priority) || null
+            }
+            onChange={(selected) => updateFilter("priority", selected?.value)}
           />
         </li>
       </ul>

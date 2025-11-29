@@ -1,19 +1,20 @@
 import React from "react";
-import { useSalesContext } from "../context/SalesAgentsContext";
 import Header from "../components/Header";
 import Aside from "../components/Aside";
 import { useLeadContext } from "../context/LeadContext";
 import LeadlistTable from "../components/LeadlistComponent/LeadlistTable";
 import useSelectList from "../hooks/useSelectList";
 import SelectDropDown from "../components/LeadlistComponent/SelectDropDown";
-import { useLocation } from "react-router";
-import { useEffect } from "react";
+// import { useLocation } from "react-router";
+// import { useEffect } from "react";
+import useRefresh from "../hooks/useRefresh";
 const SalesPage = () => {
-  const { filters, updateFilter, clearFilter } = useLeadContext();
-  const location = useLocation();
-  useEffect(() => {
-    clearFilter();
-  }, [location.pathname]);
+  useRefresh();
+  const { filters, updateFilter } = useLeadContext();
+  // const location = useLocation();
+  // useEffect(() => {
+  //   clearFilter();
+  // }, [location.pathname]);
   const {
     salesAgentDataLoading,
     salesAgentDataLoadingError,
