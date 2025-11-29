@@ -47,13 +47,16 @@ const LeadlistTable = () => {
           </tbody>
         </table>
       )}
-      <div className="d-flex justify-content-end mt-3 gap-2">
-        <button className="btn btn-secondary p-2" onClick={() => clearFilter()}>
+      <div className="d-flex justify-content-end mt-3 gap-1 gap-sm-2">
+        <button
+          className="btn btn-secondary p-1 p-sm-2"
+          onClick={() => clearFilter()}
+        >
           Clear Filter
         </button>
         <button
           onClick={() => navigate("/addLead")}
-          className="btn btn-primary p-2"
+          className="btn btn-primary p-1 p-sm-2"
         >
           Add New Lead
         </button>
